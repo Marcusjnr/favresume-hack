@@ -2,6 +2,7 @@ import 'package:favresume/api/GenerateApi.dart';
 import 'package:favresume/custom/custom_checklist_tile.dart';
 import 'package:favresume/custom/textfields/custom_text_field.dart';
 import 'package:favresume/models/GenerateModel.dart';
+import 'package:favresume/utils/check_add_more.dart';
 import 'package:favresume/utils/hex_color.dart';
 import 'package:favresume/utils/responsive_resize.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +24,9 @@ class _WorkExperienceScreenState extends State<WorkExperienceScreen> {
 
   DateTime _selectedFromDate = DateTime.now();
   DateTime _selectedToDate = DateTime.now();
-  var newFormat = DateFormat("yy-MM-dd");
-  String _updatedFromDt = DateFormat("yy-MM-dd").format(DateTime.now());
-  String _updatedToDt = DateFormat("yy-MM-dd").format(DateTime.now());
+  var newFormat = DateFormat("MMMM-yyyy");
+  String _updatedFromDt = DateFormat("MMMM-yyyy").format(DateTime.now());
+  String _updatedToDt = DateFormat("MMMM-yyyy").format(DateTime.now());
 
 
   @override
@@ -171,9 +172,37 @@ class _WorkExperienceScreenState extends State<WorkExperienceScreen> {
 
                   SizedBox(height: 18,),
 
-                  AppTextField(
-                    hintText: 'Details, separate each with a comma',
-                    controller: detailsController,
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    width: MediaQuery.of(context).size.width,
+                    height: 105.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.0),
+                        color: Colors.transparent,
+                        border: Border.all(color: Theme.of(context).primaryColor)),
+                    child: TextField(
+                        controller: detailsController,
+                        maxLines: null,
+                        style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Details, separate each with a comma',
+                          labelStyle: GoogleFonts.montserrat(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                          hintStyle: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        )),
                   ),
 
                   SizedBox(height: 18,),
@@ -185,6 +214,7 @@ class _WorkExperienceScreenState extends State<WorkExperienceScreen> {
 
                   MaterialButton(
                     onPressed: (){
+                      CheckAddMoreHelper.isAddMoreWorkExClicked = true;
                         _gatherInfo();
                     },
                     child: Text('Add More', style: GoogleFonts.montserrat(

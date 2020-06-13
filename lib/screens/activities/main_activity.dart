@@ -16,7 +16,9 @@ import 'package:favresume/screens/fragments/skills_options/interests.dart';
 import 'package:favresume/screens/fragments/skills_options/tool_type.dart';
 import 'package:favresume/screens/fragments/skills_options/webframework.dart';
 import 'package:favresume/screens/fragments/work_experience.dart';
+import 'package:favresume/utils/check_add_more.dart';
 import 'package:favresume/utils/responsive_resize.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -33,6 +35,8 @@ class _MainActivityState extends State<MainActivity> {
   //name controllers
   static TextEditingController firstNameController = new TextEditingController();
   static TextEditingController lastNameController = new TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
 
   //contact controller
   static TextEditingController emailController = new TextEditingController();
@@ -98,7 +102,9 @@ class _MainActivityState extends State<MainActivity> {
 
 
   String changeNextStatus(){
-    if(_selectedIndex == 13){
+    if(addEndBra == 2){
+      return 'LOADING..';
+    } else if(_selectedIndex == 13){
       return 'FINISH';
     }else{
       return 'NEXT';
@@ -175,6 +181,7 @@ class _MainActivityState extends State<MainActivity> {
   ];
 
   void _onItemTapped() {
+    
     setState(() {
       if(_selectedIndex < _widgetOptions.length -1){
         _selectedIndex++;
@@ -192,11 +199,13 @@ class _MainActivityState extends State<MainActivity> {
   }
 
   void _onNextPressed(){
+    
     if(changeNextStatus() == 'FINISH'){
       addEndBra++;
     }
 
     if(addEndBra == 2){
+
       GenerateApi.pushGenerate();
     }else{
       if(_selectedIndex == 2){
@@ -433,7 +442,7 @@ class _MainActivityState extends State<MainActivity> {
         );
 
         GenerateApi.otherProjectsItemsList.add(otherProjectsItem2);
-      }else if(_selectedIndex == 12){
+      } else if(_selectedIndex == 12){
 
         if(involvementController.text.isNotEmpty && involvementController.text.contains(',')){
           List<String> splitString = involvementController.text.split(',');
@@ -468,6 +477,7 @@ class _MainActivityState extends State<MainActivity> {
               )
           ),
           child: Scaffold(
+            key: _scaffoldKey,
               backgroundColor: Colors.transparent,
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
@@ -590,8 +600,21 @@ class _MainActivityState extends State<MainActivity> {
 
                             InkWell(
                               onTap: (){
-                                _onItemTapped();
-                                _onNextPressed();
+                                if(_selectedIndex == 10 && CheckAddMoreHelper.isAddMoreWorkExClicked == false){
+                                  _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                    content: Text('Please Click Add More To Add To Your List'),
+                                    backgroundColor: Theme.of(context).primaryColor,
+                                  ));
+                                }else if(_selectedIndex == 12 && CheckAddMoreHelper.isAddMoreEducationClicked == false){
+                                  _scaffoldKey.currentState.showSnackBar(SnackBar(
+                                    content: Text('Please Click Add More To Add To Your List'),
+                                    backgroundColor: Theme.of(context).primaryColor,
+                                  ));
+                                } else{
+                                  _onItemTapped();
+                                  _onNextPressed();
+                                }
+
 
                               },
                               child: Container(
@@ -599,10 +622,8 @@ class _MainActivityState extends State<MainActivity> {
                                   decoration: BoxDecoration(
                                       border: Border.all(color: Theme.of(context).primaryColor)
                                   ),
-                                  child: _selectedIndex == 13 ?
-                                  Text( changeNextStatus(), style: Theme.of(context).textTheme.headline2,)
-                                      :
-                                  Text(changeNextStatus(), style: Theme.of(context).textTheme.headline2,)
+                                  child: Text( changeNextStatus(), style: Theme.of(context).textTheme.headline2,)
+
                               ),
                             )
                           ],

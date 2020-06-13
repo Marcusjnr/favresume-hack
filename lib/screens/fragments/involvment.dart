@@ -29,34 +29,38 @@ class InvolvmentScreen extends StatelessWidget {
                   ),),
                   SizedBox(height: 30,),
 
-                  TextField(
-                    controller: controller,
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
-                        ),
-                      ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Add Involvements, Please separate with a comma',
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Theme.of(context).primaryColor)
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Theme.of(context).primaryColor)
-                        ),
-                        labelStyle: GoogleFonts.montserrat(
-                          fontSize: 15,
-                          color: Colors.white,
-                        ),
-                        hintStyle: GoogleFonts.montserrat(
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    width: MediaQuery.of(context).size.width,
+                    height: 105.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6.0),
+                        color: Colors.transparent,
+                        border: Border.all(color: Theme.of(context).primaryColor)),
+                    child: TextField(
+                      controller: controller,
+                        maxLines: null,
+                        style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                             fontSize: 15,
-                            color: Colors.grey,
+                            color: Colors.white,
                           ),
                         ),
-                      ))
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Add Involvements, Please separate with a comma',
+                          labelStyle: GoogleFonts.montserrat(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                          hintStyle: GoogleFonts.montserrat(
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        )),
+                  )
                 ],
               ),
             ),

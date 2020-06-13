@@ -42,6 +42,7 @@ class _FirstProjectOtherState extends State<FirstProjectOther> {
                   SizedBox(height: 18,),
 
                   Container(
+                    padding: EdgeInsets.all(8.0),
                     width: MediaQuery.of(context).size.width,
                     height: 105.0,
                     decoration: BoxDecoration(

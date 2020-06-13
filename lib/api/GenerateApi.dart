@@ -77,6 +77,7 @@ class GenerateApi{
   static launchURL(String urlToGo) async {
     if (await canLaunch(urlToGo)) {
       await launch(urlToGo);
+
     } else {
       throw 'Could not launch $urlToGo';
     }

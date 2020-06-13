@@ -1,6 +1,7 @@
 import 'package:favresume/api/GenerateApi.dart';
 import 'package:favresume/custom/textfields/custom_text_field.dart';
 import 'package:favresume/models/GenerateModel.dart';
+import 'package:favresume/utils/check_add_more.dart';
 import 'package:favresume/utils/hex_color.dart';
 import 'package:favresume/utils/responsive_resize.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +20,9 @@ class _ResearchExperienceScreenState extends State<ResearchExperienceScreen> {
 
   DateTime _selectedFromDate = DateTime.now();
   DateTime _selectedToDate = DateTime.now();
-  var newFormat = DateFormat("yy-MM-dd");
-  String _updatedFromDt = DateFormat("yy-MM-dd").format(DateTime.now());
-  String _updatedToDt = DateFormat("yy-MM-dd").format(DateTime.now());
+  var newFormat = DateFormat("MMMM-yyyy");
+  String _updatedFromDt = DateFormat("MMMM-yyyy").format(DateTime.now());
+  String _updatedToDt = DateFormat("MMMM-yyyy").format(DateTime.now());
 
 
   @override
@@ -165,6 +166,7 @@ class _ResearchExperienceScreenState extends State<ResearchExperienceScreen> {
 
                   MaterialButton(
                     onPressed: (){
+                      CheckAddMoreHelper.isAddMoreResearchExClicked = true;
                       _gatherInfo();
                     },
                     child: Text('Add More', style: GoogleFonts.montserrat(

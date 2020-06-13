@@ -1,6 +1,7 @@
 import 'package:favresume/api/GenerateApi.dart';
 import 'package:favresume/custom/textfields/custom_text_field.dart';
 import 'package:favresume/models/GenerateModel.dart';
+import 'package:favresume/utils/check_add_more.dart';
 import 'package:favresume/utils/hex_color.dart';
 import 'package:favresume/utils/responsive_resize.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +65,7 @@ class EducationScreen extends StatelessWidget {
 
                   MaterialButton(
                     onPressed: (){
+                      CheckAddMoreHelper.isAddMoreEducationClicked = true;
                       _gatherInfo();
                     },
                     child: Text('Add More', style: GoogleFonts.montserrat(
