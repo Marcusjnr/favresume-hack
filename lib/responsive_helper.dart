@@ -12,16 +12,18 @@ EdgeInsetsGeometry responsivePadding(MediaQueryData mediaQuery) {
   return EdgeInsets.symmetric(horizontal: 100.0, vertical: 50.0);
 }
 
-int responsiveFont(MediaQueryData mediaQuery, {text}){
+double responsiveFont(MediaQueryData mediaQuery){
   double deviceWidth = mediaQuery.size.width;
   if (deviceWidth < 379) {
-    return 20;
-  }else if(deviceWidth < 450)
-    return 15;
+    return 12;
+  }else if(deviceWidth < 700)
+    return 50;
   else if (deviceWidth < 1200) {
     return 50;
   } else if (deviceWidth < 1650) {
     return 50;
+  }else{
+    return 50;
   }
-  return 50;
+
 }

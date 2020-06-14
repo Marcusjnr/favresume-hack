@@ -459,7 +459,6 @@ class _MainActivityState extends State<MainActivity> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-
     return Stack(
       children: [
         Container(
@@ -468,7 +467,7 @@ class _MainActivityState extends State<MainActivity> {
           color: Colors.grey,
         ),
         Container(
-          padding: EdgeInsets.only(bottom: 30.0, left: 70.0, right: 70.0),
+          padding: EdgeInsets.only(bottom: 30.0, left: responsivePadding(mediaQuery), right: responsivePadding(mediaQuery)),
           decoration: BoxDecoration(
               color: Colors.black,
               image: DecorationImage(
@@ -523,11 +522,11 @@ class _MainActivityState extends State<MainActivity> {
 
                     //main alignment
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 60.0, top: 30.0, right: 20.0),
+                      padding: const EdgeInsets.only(bottom: 60.0, top: 30.0),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
+                          width: MediaQuery.of(context).size.width * responsiveWidth(mediaQuery),
                           child: AnimatedSwitcher(
                             duration: Duration(milliseconds: 500),
                             transitionBuilder: (Widget child, Animation<double> animation){
@@ -576,7 +575,7 @@ class _MainActivityState extends State<MainActivity> {
                         ),
                       ),
                     )
-                    : Container(),
+                    : Container(width: 0.0),
 
                     Align(
                         alignment: Alignment.bottomRight,
